@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import { ContactShadows, OrbitControls } from '@react-three/drei'
-import * as THREE from 'three'
+import type * as THREE from 'three'
 import { RoomShell } from './RoomShell'
 import { CeilingLamp, WallCamera } from './Devices'
 import { ROOM, type Placement, type StepId, type SurfaceKind } from './types'
@@ -13,12 +13,12 @@ type SceneProps = {
 }
 
 export function Scene({ step, lamp, camera, onPlace }: SceneProps) {
-  void step
   return (
     <Canvas
       className="scene-canvas"
       shadows
-      camera={{ position: [4.2, 2.6, 4.8], fov: 42, near: 0.1, far: 40 }}
+      // Open-front view: look into the room so ceiling undersides are large hit targets
+      camera={{ position: [3.8, 1.55, 6.2], fov: 42, near: 0.1, far: 40 }}
       gl={{ antialias: true }}
       dpr={[1, 2]}
     >
@@ -35,7 +35,7 @@ export function Scene({ step, lamp, camera, onPlace }: SceneProps) {
       <directionalLight position={[-2.5, 3, -2]} intensity={0.35} />
 
       <group>
-        <RoomShell onSurfaceClick={onPlace} />
+        <RoomShell step={step} onSurfaceClick={onPlace} />
         {lamp ? <CeilingLamp placement={lamp} /> : null}
         {camera ? <WallCamera placement={camera} /> : null}
       </group>
@@ -45,11 +45,11 @@ export function Scene({ step, lamp, camera, onPlace }: SceneProps) {
       <OrbitControls
         makeDefault
         enablePan={false}
-        minDistance={3.5}
-        maxDistance={9}
-        minPolarAngle={0.35}
-        maxPolarAngle={Math.PI / 2.05}
-        target={[0, ROOM.height * 0.35, 0]}
+        minDistance={4}
+        maxDistance={10}
+        minPolarAngle={0.45}
+        maxPolarAngle={Math.PI / 2.15}
+        target={[0, ROOM.height * 0.42, 0]}
       />
     </Canvas>
   )

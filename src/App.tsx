@@ -75,6 +75,7 @@ export default function App() {
       if (step === 'lampu') {
         if (kind !== 'ceiling') {
           // Wrong surface — ignore, place nothing
+          setHint('Langit-langit saja — klik itu diabaikan.')
           return
         }
         setLamp(clampToCeiling(point))
@@ -83,6 +84,7 @@ export default function App() {
       }
       if (step === 'keamanan') {
         if (kind !== 'wall') {
+          setHint('Dinding saja — klik itu diabaikan.')
           return
         }
         const placement = clampToWall(point, normal)
