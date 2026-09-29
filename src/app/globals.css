@@ -1,0 +1,40 @@
+:root {
+  --ink: #14201b;
+  --ink-soft: #3d4f46;
+  --accent: #1b3a2f;
+  --accent-glow: #c4a35a;
+  --rack-ink: #e8f0ea;
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(120% 80% at 10% 0%, #f3f7f2 0%, transparent 55%),
+    radial-gradient(90% 70% at 100% 20%, #d7e4da 0%, transparent 50%),
+    linear-gradient(160deg, #eaf1eb 0%, #d5e0d7 48%, #c7d5cb 100%);
+  color: var(--ink);
+  font-family: var(--font-ui), system-ui, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
