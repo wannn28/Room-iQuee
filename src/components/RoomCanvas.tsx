@@ -1,29 +1,31 @@
-import { Canvas } from '@react-three/fiber'
-import { ContactShadows, OrbitControls } from '@react-three/drei'
-import type * as THREE from 'three'
-import { RoomShell } from './RoomShell'
-import { CeilingLamp, WallCamera } from './Devices'
-import { ROOM, type Placement, type StepId, type SurfaceKind } from './types'
+"use client";
 
-type SceneProps = {
-  step: StepId
-  lamp: Placement | null
-  camera: Placement | null
-  onPlace: (kind: SurfaceKind, point: THREE.Vector3, normal: THREE.Vector3) => void
-}
+import { Canvas } from "@react-three/fiber";
+import { ContactShadows, OrbitControls } from "@react-three/drei";
+import type * as THREE from "three";
+import { RoomShell } from "@/components/RoomShell";
+import { CeilingLamp, WallCamera } from "@/components/Devices";
+import { ROOM, type Placement, type StepId, type SurfaceKind } from "@/lib/types";
+import styles from "./RoomConfigurator.module.css";
 
-export function Scene({ step, lamp, camera, onPlace }: SceneProps) {
+type RoomCanvasProps = {
+  step: StepId;
+  lamp: Placement | null;
+  camera: Placement | null;
+  onPlace: (kind: SurfaceKind, point: THREE.Vector3, normal: THREE.Vector3) => void;
+};
+
+export function RoomCanvas({ step, lamp, camera, onPlace }: RoomCanvasProps) {
   return (
     <Canvas
-      className="scene-canvas"
+      className={styles.sceneCanvas}
       shadows
-      // Open-front view: look into the room so ceiling undersides are large hit targets
       camera={{ position: [3.8, 1.55, 6.2], fov: 42, near: 0.1, far: 40 }}
       gl={{ antialias: true }}
       dpr={[1, 2]}
     >
-      <color attach="background" args={['#d9e2dc']} />
-      <fog attach="fog" args={['#d9e2dc', 10, 22]} />
+      <color attach="background" args={["#d9e2dc"]} />
+      <fog attach="fog" args={["#d9e2dc", 10, 22]} />
       <ambientLight intensity={0.55} />
       <directionalLight
         castShadow
@@ -52,5 +54,5 @@ export function Scene({ step, lamp, camera, onPlace }: SceneProps) {
         target={[0, ROOM.height * 0.42, 0]}
       />
     </Canvas>
-  )
+  );
 }

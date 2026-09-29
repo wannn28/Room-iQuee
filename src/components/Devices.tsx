@@ -1,8 +1,10 @@
-import type { Placement } from './types'
+"use client";
+
+import type { Placement } from "@/lib/types";
 
 export function CeilingLamp({ placement }: { placement: Placement }) {
-  const [x, , z] = placement.position
-  const y = placement.position[1] - 0.18
+  const [x, , z] = placement.position;
+  const y = placement.position[1] - 0.18;
 
   return (
     <group position={[x, y, z]}>
@@ -32,17 +34,15 @@ export function CeilingLamp({ placement }: { placement: Placement }) {
         <pointLight color="#ffe6a8" intensity={1.4} distance={5} decay={2} />
       </group>
     </group>
-  )
+  );
 }
 
 export function WallCamera({ placement }: { placement: Placement }) {
-  const [x, y, z] = placement.position
-  const n = placement.normal ?? [0, 0, 1]
-  // Push slightly into the room along the inward wall normal
-  const ox = x - n[0] * 0.08
-  const oz = z - n[2] * 0.08
-  // Face into the room (away from wall)
-  const yaw = Math.atan2(-n[0], -n[2])
+  const [x, y, z] = placement.position;
+  const n = placement.normal ?? [0, 0, 1];
+  const ox = x - n[0] * 0.08;
+  const oz = z - n[2] * 0.08;
+  const yaw = Math.atan2(-n[0], -n[2]);
 
   return (
     <group position={[ox, y, oz]} rotation={[0, yaw, 0]}>
@@ -67,13 +67,19 @@ export function WallCamera({ placement }: { placement: Placement }) {
         <meshStandardMaterial color="#ff3030" emissive="#ff2020" emissiveIntensity={1.5} />
       </mesh>
     </group>
-  )
+  );
 }
 
-export function DeviceGlyph({ kind }: { kind: 'lampu' | 'keamanan' }) {
-  if (kind === 'lampu') {
+export function DeviceGlyph({
+  kind,
+  className,
+}: {
+  kind: "lampu" | "keamanan";
+  className?: string;
+}) {
+  if (kind === "lampu") {
     return (
-      <svg className="device-glyph" viewBox="0 0 64 64" aria-hidden="true">
+      <svg className={className} viewBox="0 0 64 64" aria-hidden="true">
         <path
           d="M32 8v10M32 22c-7 0-12 5-12 12 0 5 3 9 8 11v5h8v-5c5-2 8-6 8-11 0-7-5-12-12-12z"
           fill="none"
@@ -84,14 +90,29 @@ export function DeviceGlyph({ kind }: { kind: 'lampu' | 'keamanan' }) {
         />
         <path d="M26 50h12M28 56h8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
       </svg>
-    )
+    );
   }
   return (
-    <svg className="device-glyph" viewBox="0 0 64 64" aria-hidden="true">
-      <rect x="10" y="18" width="36" height="28" rx="4" fill="none" stroke="currentColor" strokeWidth="3" />
+    <svg className={className} viewBox="0 0 64 64" aria-hidden="true">
+      <rect
+        x="10"
+        y="18"
+        width="36"
+        height="28"
+        rx="4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+      />
       <circle cx="28" cy="32" r="8" fill="none" stroke="currentColor" strokeWidth="3" />
       <circle cx="28" cy="32" r="3" fill="currentColor" />
-      <path d="M46 26h8v12h-8" fill="none" stroke="currentColor" strokeWidth="3" strokeLinejoin="round" />
+      <path
+        d="M46 26h8v12h-8"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinejoin="round"
+      />
     </svg>
-  )
+  );
 }

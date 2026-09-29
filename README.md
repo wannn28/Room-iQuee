@@ -10,8 +10,8 @@ Demo satu halaman untuk memasang perangkat di ruang kosong. Bahasa Indonesia. Bu
 
 ## Stack
 
-- Vite
-- React + TypeScript
+- Next.js
+- TypeScript
 - React Three Fiber
 - `@react-three/drei`
 - Three.js
@@ -22,6 +22,7 @@ Demo satu halaman untuk memasang perangkat di ruang kosong. Bahasa Indonesia. Bu
 npm install
 npm run dev
 npm run build
+npm start
 ```
 
 ## Catatan
